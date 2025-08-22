@@ -6,7 +6,7 @@ let w = (c.width = window.innerWidth),
 (hh = h / 2),
   (opts = {
     // Name //
-    strings: ["HAPPY", "BIRTHDAY", "ggggg"],
+    strings: ["HAPPY", "BIRTHDAY", "KAUSHI", "♡"],
     charSize: 40,
     charSpacing: 45,
     lineHeight: 50,
@@ -59,7 +59,7 @@ let w = (c.width = window.innerWidth),
   /**ctx.font = opts.charSize + "px verdana";*/
 ctx.font = "bold " + opts.charSize + "px Tangerine, cursive";
 
-/** add code for some changes  */
+/** add code for some changes  
 
 function setResponsiveOptions() {
   let base = Math.min(window.innerWidth, window.innerHeight);
@@ -90,7 +90,7 @@ setResponsiveOptions();
 
 //-------------------------------------------------------------------
 
-
+*/
 
 
 function Letter(char, x, y) {
@@ -451,8 +451,7 @@ window.addEventListener("resize", function () {
   ctx.font = "bold " + opts.charSize + "px Tangerine, cursive";
 
   // adding changes
-  setResponsiveOptions();
-  initializeLetters();
+
 
 
 });
