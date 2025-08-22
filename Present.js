@@ -6,7 +6,7 @@ let w = (c.width = window.innerWidth),
 (hh = h / 2),
   (opts = {
     // Name //
-    strings: ["HAPPY", "BIRTHDAY!", "ggggg"],
+    strings: ["HAPPY", "BIRTHDAY", "ggggg"],
     charSize: 40,
     charSpacing: 45,
     lineHeight: 50,
@@ -55,7 +55,43 @@ let w = (c.width = window.innerWidth),
   (TauQuarter = Tau / 4),
   (letters = []);
 
-ctx.font = opts.charSize + "px Verdana";
+/**aditional file Font */
+  /**ctx.font = opts.charSize + "px verdana";*/
+ctx.font = "bold " + opts.charSize + "px Tangerine, cursive";
+
+/** add code for some changes  */
+
+function setResponsiveOptions() {
+  let base = Math.min(window.innerWidth, window.innerHeight);
+
+  // scale text
+  opts.charSize = Math.max(20, base * 0.06);
+  opts.charSpacing = opts.charSize * 1.1;
+  opts.lineHeight = opts.charSize * 1.3;
+
+  // fireworks scale
+  opts.fireworkCircleBaseSize = base * 0.03;
+  opts.fireworkCircleAddedSize = base * 0.015;
+  opts.fireworkShardBaseVel = base * 0.004;
+  opts.fireworkShardAddedVel = base * 0.002;
+  opts.fireworkShardBaseSize = base * 0.004;
+  opts.fireworkShardAddedSize = base * 0.002;
+
+  // balloons scale
+  opts.balloonBaseSize = base * 0.04;
+  opts.balloonAddedSize = base * 0.02;
+  opts.balloonBaseVel = base * 0.0015;
+  opts.balloonAddedVel = base * 0.001;
+
+  ctx.font = "bold " + opts.charSize + "px Tangerine, cursive";
+}
+
+setResponsiveOptions();
+
+//-------------------------------------------------------------------
+
+
+
 
 function Letter(char, x, y) {
   this.char = char;
@@ -188,8 +224,11 @@ Letter.prototype.step = function () {
         this.circleCreating = false;
         this.circleFading = true;
       }
-    } else if (this.circleFading) {
-      ctx.fillStyle = this.lightColor.replace("light", 70);
+    } 
+    
+    /**Aditional 01 ( this.lightColor.replace("light", 70)) */
+    else if (this.circleFading) {
+      ctx.fillStyle = "black";
       ctx.fillText(this.char, this.x + this.dx, this.y + this.dy);
 
       ++this.tick2;
@@ -205,7 +244,9 @@ Letter.prototype.step = function () {
 
       if (this.tick2 >= this.circleFadeTime) this.circleFading = false;
     } else {
-      ctx.fillStyle = this.lightColor.replace("light", 70);
+        /** Aditional 02 (this.lightColor.replace("light", 70)) */
+
+      ctx.fillStyle = "black";
       ctx.fillText(this.char, this.x + this.dx, this.y + this.dy);
     }
 
@@ -244,7 +285,9 @@ Letter.prototype.step = function () {
 
     if (this.spawning) {
       ++this.tick;
-      ctx.fillStyle = this.lightColor.replace("light", 70);
+
+      /** Aditional 03  (this.lightColor.replace("light", 70))*/
+      ctx.fillStyle = "black";
       ctx.fillText(this.char, this.x + this.dx, this.y + this.dy);
 
       if (this.tick >= this.spawnTime) {
@@ -269,7 +312,9 @@ Letter.prototype.step = function () {
       ctx.lineTo(x, this.y);
       ctx.stroke();
 
-      ctx.fillStyle = this.lightColor.replace("light", 70);
+        /**Aditional 04 (this.lightColor.replace("light", 70)) */
+
+      ctx.fillStyle = "black";
       ctx.fillText(this.char, this.x + this.dx, this.y + this.dy);
 
       if (this.tick >= this.inflateTime) {
@@ -290,7 +335,9 @@ Letter.prototype.step = function () {
       ctx.lineTo(this.cx, this.cy + this.size);
       ctx.stroke();
 
-      ctx.fillStyle = this.lightColor.replace("light", 70);
+
+      /**Aditional 05 (this.lightColor.replace("light", 70)) */
+      ctx.fillStyle = "black";
       ctx.fillText(this.char, this.cx + this.dx, this.cy + this.dy + this.size);
 
       if (this.cy + this.size < -hh || this.cx < -hw || this.cy > hw)
@@ -401,5 +448,11 @@ window.addEventListener("resize", function () {
   hw = w / 2;
   hh = h / 2;
 
-  ctx.font = opts.charSize + "px Verdana";
+  ctx.font = "bold " + opts.charSize + "px Tangerine, cursive";
+
+  // adding changes
+  setResponsiveOptions();
+  initializeLetters();
+
+
 });
